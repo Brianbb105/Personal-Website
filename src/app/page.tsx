@@ -1,65 +1,81 @@
-import Image from "next/image";
+import Link from "next/link";
+import AppShell from "@/components/AppShell";
+
+const quickLinks = [
+  {
+    href: "/about",
+    title: "About",
+    description: "Background, language journey, and what I am building toward.",
+  },
+  {
+    href: "/photos",
+    title: "Photos",
+    description: "A few favorite frames from Xinjiang, Yosemite, and beyond.",
+  },
+  {
+    href: "/projects",
+    title: "Projects",
+    description: "Current software ideas from campus life to practical tools.",
+  },
+  {
+    href: "/blogs",
+    title: "Blogs",
+    description: "Reading notes, lessons learned, and writing in progress.",
+  },
+];
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <AppShell activePath="/">
+      <section className="hero-panel reveal delay-2">
+        <p className="eyebrow">Santa Barbara, California</p>
+        <h1 className="display-title">Brian Wumutijiang</h1>
+        <p className="lead-copy">
+          Computer science student shaping ideas through code, photography, and storytelling.
+        </p>
+
+        <div className="pill-row">
+          <span className="pill">CS Student</span>
+          <span className="pill">Photography</span>
+          <span className="pill">Singing</span>
+          <span className="pill">Fitness</span>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+      </section>
+
+      <section className="grid-2 reveal delay-3">
+        <article className="card">
+          <h2>Current Focus</h2>
+          <ul className="list-stack">
+            <li>Building stronger algorithm and systems thinking.</li>
+            <li>Improving product-level front-end and full-stack development.</li>
+            <li>Creating a personal portfolio that keeps evolving over time.</li>
+          </ul>
+        </article>
+
+        <article className="card warm">
+          <h2>What Matters To Me</h2>
+          <ul className="list-stack">
+            <li>Design that feels intentional and personal.</li>
+            <li>Code that stays readable as projects grow.</li>
+            <li>Work that bridges cultures, language, and technology.</li>
+          </ul>
+        </article>
+      </section>
+
+      <section className="grid-2 reveal delay-4">
+        {quickLinks.map((item) => (
+          <Link key={item.href} href={item.href} className="feature-card">
+            <p className="feature-kicker">Explore</p>
+            <h3>{item.title}</h3>
+            <p>{item.description}</p>
+          </Link>
+        ))}
+      </section>
+
+      <section className="card quiet reveal delay-5">
+        <p className="note-line">Thanks for visiting my website. Thank you. Rahmat.</p>
+        <p className="muted">我会持续更新个人作品、读书笔记和一些生活记录，欢迎常回来看看。</p>
+      </section>
+    </AppShell>
   );
 }

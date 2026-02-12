@@ -318,6 +318,48 @@ a {
   color: var(--text-main);
 }
 
+.blog-post {
+  padding: clamp(1rem, 2.3vw, 1.4rem);
+}
+
+.blog-cover {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  overflow: hidden;
+  background: rgba(7, 18, 30, 0.7);
+}
+
+.blog-cover img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.blog-meta {
+  margin: 0.9rem 0 0;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.74rem;
+  color: var(--teal);
+}
+
+.blog-post h2 {
+  margin-top: 0.35rem;
+}
+
+.blog-body {
+  margin-top: 0.85rem;
+  display: grid;
+  gap: 0.9rem;
+}
+
+.blog-body p {
+  margin: 0;
+  color: var(--text-main);
+  font-size: clamp(0.98rem, 1.2vw, 1.08rem);
+  line-height: 1.75;
+}
+
 .chip-row {
   margin-top: 0.85rem;
   display: flex;

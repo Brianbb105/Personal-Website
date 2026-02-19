@@ -1,5 +1,6 @@
 import Image from "next/image";
 import AppShell from "@/components/AppShell";
+import { GlassCard } from "@/components/glass";
 
 const firstPostParagraphs = [
   "YEPIEEEEEE! I feel really happy because the website I made is finally launched. This project took me around a month. I started without even knowing how to create a project in WebStorm, and now I have deployed my website. I learned so much, much more than school can teach me.",
@@ -15,16 +16,16 @@ const firstPostParagraphs = [
 export default function BlogsPage() {
   return (
     <AppShell activePath="/blogs">
-      <section className="hero-panel compact reveal delay-2">
+      <GlassCard as="section" className="hero-panel compact reveal delay-2">
         <p className="eyebrow">Blogs</p>
         <h1 className="section-title">First Post Is Live</h1>
         <p className="lead-copy">
           I use this section for project updates, technical reflections, and lessons learned while building useful
           things for students.
         </p>
-      </section>
+      </GlassCard>
 
-      <article className="card blog-post reveal delay-3">
+      <GlassCard as="article" className="card blog-post reveal delay-3">
         <div className="blog-cover">
           <Image
             src="/blogs/sbccplan-launch.png"
@@ -41,13 +42,13 @@ export default function BlogsPage() {
             <p key={paragraph}>{paragraph}</p>
           ))}
         </div>
-      </article>
+      </GlassCard>
 
-      <section className="card warm reveal delay-4">
+      <GlassCard as="section" className="card warm reveal delay-4">
         <p className="note-line">
           More posts are coming soon, including updates on new features and what I learn while maintaining SBCCPlan.
         </p>
-      </section>
+      </GlassCard>
     </AppShell>
   );
 }

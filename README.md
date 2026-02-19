@@ -1,36 +1,63 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Personal Website
+
+This is a Next.js App Router site for Brian Wumutijiang.
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Glass Design System
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The UI uses a tokenized frosted-glass system inspired by modern translucent interfaces.
 
-## Learn More
+### Tokens
 
-To learn more about Next.js, take a look at the following resources:
+All visual tokens live in:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `src/app/design-tokens.css`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Key token groups:
 
-## Deploy on Vercel
+- Background: `--bg-0`, `--bg-1`
+- Glass surfaces: `--glass-1`, `--glass-2`
+- Strokes: `--stroke-1`, `--stroke-2`
+- Shadows: `--shadow-1`, `--shadow-2`
+- Blur: `--blur-strong`, `--blur-med`
+- Radius: `--r-pill`, `--r-card`, `--r-tile`
+- Spacing scale: `--space-3` (12px), `--space-4` (16px), `--space-5` (20px), `--space-6` (24px), `--space-8` (32px)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Accessibility-specific token overrides are included for:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `prefers-contrast: more`
+- `prefers-reduced-transparency: reduce`
+
+### Glass Components
+
+Reusable primitives are in:
+
+- `src/components/glass/GlassPill.tsx`
+- `src/components/glass/GlassCard.tsx`
+- `src/components/glass/GlassTile.tsx`
+- `src/components/glass/GlassButton.tsx`
+
+Example usage:
+
+```tsx
+import { GlassButton, GlassCard, GlassPill, GlassTile } from "@/components/glass";
+
+<GlassPill as="header">...</GlassPill>
+<GlassCard as="section" className="card">...</GlassCard>
+<GlassTile>...</GlassTile>
+<GlassButton href="/projects">View Projects</GlassButton>
+```
+
+### Where To Tweak The Look
+
+- Global material/background behavior: `src/app/globals.css`
+- Token values (blur, tint, border, radius): `src/app/design-tokens.css`
+- Root pill header structure: `src/components/AppShell.tsx`
+- Homepage tile/card composition: `src/app/page.tsx`

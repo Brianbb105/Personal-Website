@@ -1,18 +1,17 @@
 import Image from "next/image";
 import AppShell from "@/components/AppShell";
+import { GlassCard } from "@/components/glass";
 
 const photos = [
   {
     src: "/photos/DSC00730.jpg",
-    caption:
-      "Part of the Tengri Tagh (Tian Shan Mountains), captured from my home with a telephoto lens.",
+    caption: "Part of the Tengri Tagh (Tian Shan Mountains), captured from my home with a telephoto lens.",
     place: "Xinjiang",
     detail: "Sony 24-240mm",
   },
   {
     src: "/photos/DSC01084.jpg",
-    caption:
-      "The Kumtag Desert in Piqan, where soft dunes and open skies create a calm, cinematic texture.",
+    caption: "The Kumtag Desert in Piqan, where soft dunes and open skies create a calm, cinematic texture.",
     place: "Kumtag Desert",
     detail: "Golden hour",
   },
@@ -27,20 +26,18 @@ const photos = [
 export default function PhotosPage() {
   return (
     <AppShell activePath="/photos">
-      <section className="hero-panel compact reveal delay-2">
+      <GlassCard as="section" className="hero-panel compact reveal delay-2">
         <p className="eyebrow">Photography</p>
         <h1 className="section-title">Featured Frames</h1>
-        <p className="lead-copy">
-          A small set of photos I keep revisiting. Each one marks a place, a mood, and a memory.
-        </p>
-      </section>
+        <p className="lead-copy">A small set of photos I keep revisiting. Each one marks a place, a mood, and a memory.</p>
+      </GlassCard>
 
       <section className="photo-grid">
         {photos.map((photo, index) => {
           const delayClass = `delay-${Math.min(index + 3, 6)}`;
 
           return (
-            <figure key={photo.src} className={`photo-card reveal ${delayClass}`}>
+            <GlassCard key={photo.src} as="figure" className={`photo-card reveal ${delayClass}`}>
               <div className="photo-media">
                 <Image
                   src={photo.src}
@@ -58,7 +55,7 @@ export default function PhotosPage() {
                   <span>{photo.detail}</span>
                 </div>
               </figcaption>
-            </figure>
+            </GlassCard>
           );
         })}
       </section>

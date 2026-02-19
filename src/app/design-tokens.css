@@ -1,0 +1,85 @@
+:root {
+  --bg-0: #05070c;
+  --bg-1: #081427;
+
+  --glass-1: rgba(255, 255, 255, 0.06);
+  --glass-2: rgba(255, 255, 255, 0.1);
+
+  --stroke-1: rgba(255, 255, 255, 0.12);
+  --stroke-2: rgba(255, 255, 255, 0.18);
+
+  --shadow-1: 0 10px 30px rgba(0, 0, 0, 0.35);
+  --shadow-2: 0 2px 10px rgba(0, 0, 0, 0.25);
+
+  --blur-strong: 28px;
+  --blur-med: 20px;
+
+  --r-pill: 9999px;
+  --r-card: 24px;
+  --r-tile: 20px;
+
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+
+  --text-main: #f3f8ff;
+  --text-muted: #c5d4e4;
+  --text-soft: #9fb3c8;
+  --accent-teal: #88f3dc;
+  --accent-cyan: #9be9ff;
+  --accent-warm: #ffd7aa;
+  --focus-ring: 0 0 0 2px rgba(155, 233, 255, 0.84), 0 0 0 6px rgba(21, 54, 80, 0.5);
+  --transition-fast: 180ms cubic-bezier(0.22, 0.65, 0.2, 1);
+
+  /* Backward-compatible aliases used by existing classes */
+  --bg-ink: var(--bg-0);
+  --bg-navy: var(--bg-1);
+  --bg-teal: #0a1d34;
+  --bg-vignette: rgba(3, 8, 18, 0.72);
+
+  --glass-root: var(--glass-2);
+  --glass-card: var(--glass-1);
+  --glass-tile: var(--glass-1);
+  --glass-button: rgba(255, 255, 255, 0.08);
+
+  --glass-border-strong: var(--stroke-2);
+  --glass-border: var(--stroke-1);
+  --glass-border-soft: rgba(255, 255, 255, 0.1);
+
+  --blur-root: var(--blur-strong);
+  --blur-card: var(--blur-med);
+  --blur-tile: var(--blur-med);
+
+  --radius-pill: var(--r-pill);
+  --radius-card: var(--r-card);
+  --radius-tile: var(--r-tile);
+  --radius-subtle: 16px;
+
+  --shadow-soft: var(--shadow-1);
+  --shadow-lift: 0 14px 36px rgba(0, 0, 0, 0.42);
+}
+
+@media (prefers-contrast: more) {
+  :root {
+    --glass-1: rgba(255, 255, 255, 0.12);
+    --glass-2: rgba(255, 255, 255, 0.18);
+    --stroke-1: rgba(255, 255, 255, 0.2);
+    --stroke-2: rgba(255, 255, 255, 0.28);
+    --text-muted: #e1ecf7;
+    --text-soft: #d0deec;
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  :root {
+    --glass-1: rgba(10, 20, 36, 0.94);
+    --glass-2: rgba(10, 20, 36, 0.98);
+    --blur-strong: 0px;
+    --blur-med: 0px;
+    --blur-root: 0px;
+    --blur-card: 0px;
+    --blur-tile: 0px;
+  }
+}

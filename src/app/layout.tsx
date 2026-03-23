@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Fraunces, JetBrains_Mono, Sora } from "next/font/google";
+import { Analytics } from "@vercel/analytics/react"
 import "./globals.css";
 
 const sora = Sora({
@@ -35,6 +36,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${sora.variable} ${fraunces.variable} ${jetBrainsMono.variable}`}>
         {children}
+        <Analytics />
       </body>
     </html>
   );

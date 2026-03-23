@@ -15,6 +15,7 @@ const fraunces = Fraunces({
   weight: ["500", "600", "700"],
 });
 
+
 const jetBrainsMono = JetBrains_Mono({
   variable: "--font-mono",
   subsets: ["latin"],

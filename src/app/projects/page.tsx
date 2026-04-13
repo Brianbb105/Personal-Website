@@ -7,7 +7,7 @@ export default function ProjectsPage() {
     <AppShell activePath="/projects">
       <section className="projects-heading-block reveal delay-2">
         <h1 className="panel-heading">Projects</h1>
-        <p className="panel-description">Practical software and in-progress ideas shaped by real student workflows.</p>
+        <p className="panel-description">Cool stuff I'm working on. </p>
       </section>
 
       <section className="projects-feature reveal delay-3">

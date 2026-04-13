@@ -1,63 +1,62 @@
 import Image from "next/image";
 import AppShell from "@/components/AppShell";
-import { GlassCard } from "@/components/glass";
-
-const photos = [
-  {
-    src: "/photos/DSC00730.jpg",
-    caption: "Part of the Tengri Tagh (Tian Shan Mountains), captured from my home with a telephoto lens.",
-    place: "Xinjiang",
-    detail: "Sony 24-240mm",
-  },
-  {
-    src: "/photos/DSC01084.jpg",
-    caption: "The Kumtag Desert in Piqan, where soft dunes and open skies create a calm, cinematic texture.",
-    place: "Kumtag Desert",
-    detail: "Golden hour",
-  },
-  {
-    src: "/photos/DSC01838.jpg",
-    caption: "A Yosemite frame that felt timeless, with clean lines and quiet depth in the landscape.",
-    place: "Yosemite",
-    detail: "Travel series",
-  },
-];
+import { photos } from "@/content/siteContent";
 
 export default function PhotosPage() {
+  const [featuredPhoto, ...photoCards] = photos;
+
   return (
     <AppShell activePath="/photos">
-      <GlassCard as="section" className="hero-panel compact reveal delay-2">
-        <p className="eyebrow">Photography</p>
-        <h1 className="section-title">Featured Frames</h1>
-        <p className="lead-copy">A small set of photos I keep revisiting. Each one marks a place, a mood, and a memory.</p>
-      </GlassCard>
+      <section className="photos-heading-block reveal delay-2">
+        <h1 className="panel-heading">Photos</h1>
+        <p className="panel-description">Featured photos</p>
+      </section>
 
-      <section className="photo-grid">
-        {photos.map((photo, index) => {
-          const delayClass = `delay-${Math.min(index + 3, 6)}`;
+      <section className="photos-feature reveal delay-3">
+        <div className="liquid-media photo-media">
+          <Image
+            src={featuredPhoto.src}
+            alt={`${featuredPhoto.title} in ${featuredPhoto.location}`}
+            width={featuredPhoto.width}
+            height={featuredPhoto.height}
+            priority
+            sizes="(max-width: 860px) 100vw, 900px"
+            className="media-image photo-media-image"
+          />
+          <div className="media-scrim" />
+          <div className="spotlight-shell">
+            <div className="spotlight-card spotlight-card--soft photo-description-tab">
+              <p className="spotlight-label">{featuredPhoto.location}</p>
+              <h3 className="spotlight-title">{featuredPhoto.title}</h3>
+              <p className="spotlight-copy">{featuredPhoto.note}</p>
+            </div>
+          </div>
+        </div>
+      </section>
 
-          return (
-            <GlassCard key={photo.src} as="figure" className={`photo-card reveal ${delayClass}`}>
-              <div className="photo-media">
-                <Image
-                  src={photo.src}
-                  alt={photo.caption}
-                  width={1600}
-                  height={1067}
-                  sizes="(max-width: 700px) 100vw, (max-width: 980px) 50vw, 33vw"
-                />
-              </div>
-
-              <figcaption className="photo-caption">
-                <p>{photo.caption}</p>
-                <div className="photo-meta">
-                  <span>{photo.place}</span>
-                  <span>{photo.detail}</span>
+      <section className="photos-gallery photo-grid photo-grid--feature reveal delay-3">
+        {photoCards.map((photo) => (
+          <article key={photo.src}>
+            <div className="liquid-media photo-media">
+              <Image
+                src={photo.src}
+                alt={`${photo.title} in ${photo.location}`}
+                width={photo.width}
+                height={photo.height}
+                sizes="(max-width: 860px) 100vw, 900px"
+                className="media-image photo-media-image"
+              />
+              <div className="media-scrim" />
+              <div className="spotlight-shell">
+                <div className="spotlight-card spotlight-card--soft photo-description-tab">
+                  <p className="spotlight-label">{photo.location}</p>
+                  <h3 className="spotlight-title">{photo.title}</h3>
+                  <p className="spotlight-copy">{photo.note}</p>
                 </div>
-              </figcaption>
-            </GlassCard>
-          );
-        })}
+              </div>
+            </div>
+          </article>
+        ))}
       </section>
     </AppShell>
   );

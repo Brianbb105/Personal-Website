@@ -1,14 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { GlassButton, GlassPill } from "@/components/glass";
-
-const navItems = [
-  { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
-  { href: "/photos", label: "Photos" },
-  { href: "/projects", label: "Projects" },
-  { href: "/blogs", label: "Blogs" },
-] as const;
+import { navItems } from "@/content/siteContent";
 
 type NavPath = (typeof navItems)[number]["href"];
 
@@ -18,49 +10,28 @@ type AppShellProps = {
 };
 
 export default function AppShell({ activePath, children }: AppShellProps) {
+  const copyrightYear = new Date().getFullYear();
+
   return (
-    <div className="app-frame">
-      <GlassPill as="header" className="top-nav reveal delay-1">
-        <div className="top-nav-brand">
-          <Link href="/" className="brand-badge" aria-label="Go to homepage">
-            BW.
-          </Link>
-
-          <div className="brand-copy">
-            <p className="brand-name">Brian Wumutijiang</p>
-            <p className="brand-location">Santa Barbara, California</p>
-          </div>
-        </div>
-
+    <div className="site-shell">
+      <header className="top-nav reveal delay-1">
         <nav className="nav-links" aria-label="Primary">
           {navItems.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className={`glass-button nav-link${activePath === item.href ? " is-active" : ""}`}
+              className={`nav-link${activePath === item.href ? " is-active" : ""}`}
+              aria-current={activePath === item.href ? "page" : undefined}
             >
               {item.label}
             </Link>
           ))}
         </nav>
+      </header>
 
-        <div className="quick-actions" aria-label="Quick actions">
-          <GlassButton href="/projects" className="quick-action" tone="soft">
-            Latest Builds
-          </GlassButton>
-          <GlassButton href="/blogs" className="quick-action icon-action" aria-label="Open latest writing">
-            <span aria-hidden className="icon-glyph">
-              ✦
-            </span>
-          </GlassButton>
-        </div>
-      </GlassPill>
+      <main className="page-main">{children}</main>
 
-      <main className="page-content">{children}</main>
-
-      <footer className="site-foot reveal delay-6">
-        Built with curiosity, consistency, and late-night notes.
-      </footer>
+      <footer className="site-footer reveal delay-6">© {copyrightYear} Brian Wumutijiang. All rights reserved.</footer>
     </div>
   );
 }

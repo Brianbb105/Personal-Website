@@ -1,154 +1,146 @@
+import Image from "next/image";
 import Link from "next/link";
 import AppShell from "@/components/AppShell";
-import { GlassButton, GlassCard, GlassTile } from "@/components/glass";
+import FeaturePanel from "@/components/FeaturePanel";
+import { getAllBlogPosts } from "@/content/blogContent";
+import { featuredProject, photos } from "@/content/siteContent";
 
-const quickLinks = [
-  {
-    href: "/about",
-    title: "About",
-    icon: "AB",
-    description: "Background, language journey, and what I am building toward.",
-  },
-  {
-    href: "/photos",
-    title: "Photos",
-    icon: "PH",
-    description: "Favorite frames from Xinjiang, Yosemite, and beyond.",
-  },
-  {
-    href: "/projects",
-    title: "Projects",
-    icon: "PR",
-    description: "Current software ideas from campus life to practical tools.",
-  },
-  {
-    href: "/blogs",
-    title: "Blogs",
-    icon: "BL",
-    description: "Reading notes, lessons learned, and writing in progress.",
-  },
-];
+function getBlogPreviewMeta(category: string, date: string): string {
+  return [category, date].filter(Boolean).join(" • ");
+}
 
-const nowTiles = [
-  {
-    label: "Learning Sprint",
-    value: "Algorithms + systems",
-    note: "Daily problem solving and design drills",
-  },
-  {
-    label: "Build Mode",
-    value: "Portfolio iterations",
-    note: "Refining UI and full-stack execution",
-  },
-  {
-    label: "Creative Block",
-    value: "Photography edits",
-    note: "Short visual stories from recent trips",
-  },
-  {
-    label: "Community",
-    value: "Tutoring sessions",
-    note: "Helping peers in CS 140 and MATH 150",
-  },
-  {
-    label: "Language",
-    value: "Uyghur + Mandarin + English",
-    note: "Cross-cultural communication stays central",
-  },
-  {
-    label: "Energy",
-    value: "Gym + consistency",
-    note: "Discipline that transfers to coding",
-  },
-];
+function getDisplayTitle(title: string, slug: string): string {
+  return title || slug;
+}
 
-export default function Home() {
+export default async function Home() {
+  const blogPosts = (await getAllBlogPosts()).slice(0, 2);
+
   return (
     <AppShell activePath="/">
-      <GlassCard as="section" className="hero-panel reveal delay-2">
-        <p className="eyebrow">Santa Barbara, California</p>
-        <h1 className="display-title">Brian Wumutijiang</h1>
-        <p className="lead-copy">
-          Computer science student shaping ideas through code, photography, and storytelling.
-        </p>
+      <section className="liquid-panel hero-panel reveal delay-2">
+        <div className="home-hero-grid">
+          <div className="hero-copy">
+            <div className="hero-heading">
+              <p className="hero-intro">My name is</p>
+              <h1 className="hero-name">Brian Wumutijiang</h1>
+            </div>
 
-        <div className="pill-row" aria-label="Interests">
-          <span className="pill">CS Student</span>
-          <span className="pill">Photography</span>
-          <span className="pill">Singing</span>
-          <span className="pill">Fitness</span>
-        </div>
+            <div className="hero-body">
+              <p>I am a Computer Science student in California, U.S.</p>
+              <p>I like reading, coding, and hiking.</p>
+            </div>
+          </div>
 
-        <div className="home-actions">
-          <GlassButton href="/projects">View Projects</GlassButton>
-          <GlassButton href="/blogs" tone="soft">
-            Read Latest Post
-          </GlassButton>
-        </div>
-      </GlassCard>
-
-      <section className="grid-2 reveal delay-3">
-        <GlassCard className="card">
-          <h2>Current Focus</h2>
-          <ul className="list-stack">
-            <li>Building stronger algorithm and systems thinking.</li>
-            <li>Improving product-level front-end and full-stack development.</li>
-            <li>Creating a personal portfolio that keeps evolving over time.</li>
-          </ul>
-        </GlassCard>
-
-        <GlassCard className="card warm">
-          <h2>What Matters To Me</h2>
-          <ul className="list-stack">
-            <li>Design that feels intentional and personal.</li>
-            <li>Code that stays readable as projects grow.</li>
-            <li>Work that bridges cultures, language, and technology.</li>
-          </ul>
-        </GlassCard>
-      </section>
-
-      <section className="tile-section reveal delay-4">
-        <div className="tile-section-head">
-          <p className="eyebrow">Explore</p>
-          <h2 className="section-subtitle">Control Center Shortcuts</h2>
-        </div>
-
-        <div className="tile-grid">
-          {quickLinks.map((item) => (
-            <Link key={item.href} href={item.href} className="tile-link">
-              <GlassTile>
-                <span className="tile-icon" aria-hidden>
-                  {item.icon}
-                </span>
-                <h3>{item.title}</h3>
-                <p>{item.description}</p>
-              </GlassTile>
-            </Link>
-          ))}
+          <div className="liquid-media portrait-media media-placeholder" aria-label="Portrait photo of Brian Wumutijiang">
+            <Image
+              src="/home/IMG_1731.jpeg"
+              alt="Brian Wumutijiang standing by a rocky waterfall"
+              fill
+              priority
+              sizes="(max-width: 860px) 100vw, 380px"
+              className="media-image hero-photo-image"
+            />
+          </div>
         </div>
       </section>
 
-      <section className="tile-section reveal delay-5">
-        <div className="tile-section-head">
-          <p className="eyebrow">Now</p>
-          <h2 className="section-subtitle">Current Signals</h2>
-        </div>
+      <FeaturePanel
+        title="Projects"
+        description="Current software ideas and the tools I am actively shaping."
+        href="/projects"
+        linkLabel="Open projects"
+        className="reveal delay-3"
+      >
+        <Link href="/projects" className="media-link" aria-label="Open projects page">
+          <div className="liquid-media">
+            <Image
+              src={featuredProject.image}
+              alt={`${featuredProject.title} preview`}
+              fill
+              sizes="(max-width: 860px) 100vw, 900px"
+              className="media-image position-top"
+            />
+            <div className="media-scrim" />
+            <div className="spotlight-shell">
+              <div className="spotlight-card spotlight-card--soft">
+                <p className="spotlight-label">Featured Project</p>
+                <h3 className="spotlight-title">{featuredProject.title}</h3>
+                <p className="spotlight-copy">{featuredProject.summary}</p>
+                <div className="spotlight-chip-row">
+                  {featuredProject.tags.map((tag) => (
+                    <span key={tag} className="spotlight-chip">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </Link>
+      </FeaturePanel>
 
-        <div className="tile-grid tile-grid-compact">
-          {nowTiles.map((tile) => (
-            <GlassTile key={tile.label} className="status-tile">
-              <p className="tile-label">{tile.label}</p>
-              <p className="tile-value">{tile.value}</p>
-              <p className="tile-note">{tile.note}</p>
-            </GlassTile>
-          ))}
-        </div>
-      </section>
+      <FeaturePanel
+        title="Photos"
+        description="A few frames from Xinjiang, Yosemite, and the places I keep revisiting."
+        href="/photos"
+        linkLabel="Open photos"
+        className="reveal delay-4"
+      >
+        <Link href="/photos" className="media-link" aria-label="Open photos page">
+          <div className="liquid-media photo-media">
+            <Image
+              src={photos[1].src}
+              alt={`${photos[1].title} in ${photos[1].location}`}
+              width={photos[1].width}
+              height={photos[1].height}
+              sizes="(max-width: 860px) 100vw, 900px"
+              className="media-image photo-media-image"
+            />
+            <div className="media-scrim" />
+            <div className="spotlight-shell">
+              <div className="spotlight-card spotlight-card--soft photo-description-tab">
+                <p className="spotlight-label">{photos[1].location}</p>
+                <h3 className="spotlight-title">{photos[1].title}</h3>
+                <p className="spotlight-copy">{photos[1].note}</p>
+              </div>
+            </div>
+          </div>
+        </Link>
+      </FeaturePanel>
 
-      <GlassCard as="section" className="card quiet reveal delay-6">
-        <p className="note-line">Thanks for visiting my website. Thank you. Rahmat.</p>
-        <p className="muted">我会持续更新个人作品、读书笔记和一些生活记录，欢迎常回来看看。</p>
-      </GlassCard>
+      <FeaturePanel
+        title="Blogs"
+        description="Project notes, reflections, and writing that tracks what I am learning."
+        href="/blogs"
+        linkLabel="Open blogs"
+        className="home-blogs-panel reveal delay-5"
+      >
+        <Link href="/blogs" className="media-link blogs-preview-link" aria-label="Open blogs page">
+          <div className="preview-stack preview-stack--inline">
+            {blogPosts.map((post) => {
+              const previewMeta = getBlogPreviewMeta(post.category, post.date);
+              const displayTitle = getDisplayTitle(post.title, post.slug);
+
+              return (
+                <article key={post.slug} className="preview-card">
+                  {previewMeta ? <p className="preview-meta">{previewMeta}</p> : null}
+                  <h3>{displayTitle}</h3>
+                  {post.summary ? <p>{post.summary}</p> : null}
+                </article>
+              );
+            })}
+          </div>
+        </Link>
+      </FeaturePanel>
+
+      <FeaturePanel
+        title="About"
+        description="A quick snapshot of who I am, what I study, and the things I care about."
+        href="/about"
+        linkLabel="Open About"
+        className="reveal delay-6"
+      />
     </AppShell>
   );
 }

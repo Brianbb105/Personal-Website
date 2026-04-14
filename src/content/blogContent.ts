@@ -8,6 +8,7 @@ const BLOG_CONTENT_DIRECTORY = path.join(process.cwd(), "src/content/blog");
 type BlogFrontmatter = {
   title: string;
   date: string;
+  sortDate: string;
   slug: string;
   category: string;
   coverImage: string;
@@ -39,6 +40,7 @@ function toFrontmatter(data: Record<string, unknown>, fallbackSlug: string): Blo
   return {
     title: toStringValue(data.title),
     date: toStringValue(data.date),
+    sortDate: toStringValue(data.sortDate),
     slug: toStringValue(data.slug) || fallbackSlug,
     category: toStringValue(data.category),
     coverImage: toStringValue(data.coverImage),
@@ -77,7 +79,9 @@ const loadBlogPosts = cache(async (): Promise<BlogPostWithContent[]> => {
   );
 
   return posts.sort((left, right) => {
-    const dateDifference = parseDateValue(right.date) - parseDateValue(left.date);
+    const rightSortDate = right.sortDate || right.date;
+    const leftSortDate = left.sortDate || left.date;
+    const dateDifference = parseDateValue(rightSortDate) - parseDateValue(leftSortDate);
 
     if (dateDifference !== 0) {
       return dateDifference;

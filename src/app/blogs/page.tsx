@@ -24,23 +24,24 @@ export default async function BlogsPage() {
         {sortedPosts.map((post) => {
           const metadataLine = getMetadataLine(post.category, post.date);
           const displayTitle = getDisplayTitle(post.title, post.slug);
+          const isSbccPlanPost = post.slug === "sbccplan-is-finally-launched";
 
           return (
             <Link key={post.slug} href={`/blogs/${post.slug}`} className="media-link blog-card-link" aria-label={`Read ${displayTitle}`}>
-              <article className="detail-card">
+              <article className="detail-card blog-listing-card">
+                {metadataLine ? <p className="detail-label">{metadataLine}</p> : null}
+                <h3>{displayTitle}</h3>
                 {post.coverImage ? (
-                  <div className="article-cover">
+                  <div className="article-cover blog-card-cover">
                     <Image
                       src={post.coverImage}
                       alt={`${displayTitle} cover image`}
                       fill
                       sizes="(max-width: 860px) 100vw, 900px"
-                      className="media-image position-top"
+                      className={`media-image ${isSbccPlanPost ? "position-top" : "position-center"}`}
                     />
                   </div>
                 ) : null}
-                {metadataLine ? <p className="detail-label">{metadataLine}</p> : null}
-                <h3>{displayTitle}</h3>
               </article>
             </Link>
           );

@@ -50,12 +50,13 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   const blogMeta = formatBlogMeta(post.category, post.date);
   const displayTitle = getDisplayTitle(post.title, post.slug);
+  const showDetailCover = Boolean(post.coverImage) && post.slug !== "journals-from-my-first-year-at-ucsb";
 
   return (
     <AppShell activePath="/blogs">
       <section className="blogs-post reveal delay-2">
         <article className="detail-card blog-article-card">
-          {post.coverImage ? (
+          {showDetailCover ? (
             <div className="article-cover">
               <Image
                 src={post.coverImage}

@@ -1,11 +1,11 @@
 import AppShell from "@/components/AppShell";
 import FeaturePanel from "@/components/FeaturePanel";
 import { getAboutContent } from "@/content/aboutContent";
-import { aboutFacts, aboutTags, timeline } from "@/content/siteContent";
+import { aboutFacts, aboutTags } from "@/content/siteContent";
 
 export default async function AboutPage() {
   const aboutContent = await getAboutContent();
-  const [backgroundText = "", focusText = ""] = aboutContent.paragraphs;
+  const [backgroundText = ""] = aboutContent.paragraphs;
 
   return (
     <AppShell activePath="/about">
@@ -26,7 +26,7 @@ export default async function AboutPage() {
         </div>
       </FeaturePanel>
 
-      <section className="about-grid reveal delay-3">
+      <section className="about-grid about-grid--single reveal delay-3">
         <article className="detail-card">
           <p className="detail-label">Background</p>
           <h3>What shapes my perspective</h3>
@@ -39,22 +39,6 @@ export default async function AboutPage() {
             ))}
           </div>
         </article>
-
-        <article className="detail-card">
-          <p className="detail-label">Right now</p>
-          <h3>What I am focused on</h3>
-          <p>{focusText}</p>
-        </article>
-      </section>
-
-      <section className="detail-grid reveal delay-4">
-        {timeline.map((item) => (
-          <article key={item.title} className="detail-card">
-            <p className="detail-label">{item.year}</p>
-            <h3>{item.title}</h3>
-            <p>{item.detail}</p>
-          </article>
-        ))}
       </section>
     </AppShell>
   );

@@ -94,7 +94,7 @@ img {
 .site-shell {
   position: relative;
   isolation: isolate;
-  width: min(1260px, calc(100% - 3rem));
+  width: min(1260px, calc(100% - 2rem));
   margin: 0 auto;
   padding: 2rem 0 5rem;
 }
@@ -107,7 +107,7 @@ img {
   position: sticky;
   top: 1.6rem;
   z-index: 40;
-  padding: 0.6rem;
+  padding: 0.48rem;
   border-radius: 1.8rem;
   border: 1px solid var(--liquid-edge);
   background:
@@ -1146,6 +1146,12 @@ img {
   grid-template-columns: 1.2fr 1fr;
 }
 
+.about-grid--single {
+  grid-template-columns: minmax(0, 1fr);
+  max-width: 900px;
+  margin-inline: auto;
+}
+
 .detail-card {
   padding: 1.45rem;
   border-radius: var(--radius-card);
@@ -1342,7 +1348,7 @@ img {
 
 @media (max-width: 1100px) {
   .site-shell {
-    width: min(1260px, calc(100% - 2rem));
+    width: min(1260px, calc(100% - 1.5rem));
   }
 
   .home-hero-grid,
@@ -1380,13 +1386,13 @@ img {
 
 @media (max-width: 860px) {
   .site-shell {
-    width: min(1260px, calc(100% - 1.25rem));
+    width: min(1260px, calc(100% - 0.875rem));
     padding-top: 1rem;
   }
 
   .top-nav {
     top: 0.9rem;
-    padding: 0.45rem;
+    padding: 0.38rem;
   }
 
   .nav-links {
@@ -1495,7 +1501,64 @@ img {
   }
 
   .photo-media {
+    overflow: visible;
     min-height: 0;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+
+  .photo-media::before,
+  .photo-media::after,
+  .photo-media .media-scrim {
+    display: none;
+  }
+
+  .photo-media-image {
+    border-radius: var(--radius-card);
+    border: 1px solid var(--liquid-edge-soft);
+    box-shadow: var(--shadow-panel);
+  }
+
+  .photo-media .spotlight-shell {
+    position: static;
+    inset: auto;
+    margin-top: 0.85rem;
+    padding: 0 0.65rem 0.15rem;
+  }
+
+  .photo-media .photo-description-tab {
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+
+  .photo-media .photo-description-tab .spotlight-label {
+    color: #7a7a82;
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+  }
+
+  .photo-media .photo-description-tab .spotlight-title {
+    margin-top: 0.32rem;
+    font-size: clamp(1.2rem, 5.2vw, 1.55rem);
+    font-weight: 500;
+    line-height: 1.12;
+    letter-spacing: 0;
+  }
+
+  .photo-media .photo-description-tab .spotlight-copy {
+    max-width: 28rem;
+    margin-top: 0.35rem;
+    color: #54545b;
+    font-size: clamp(0.92rem, 3.4vw, 1rem);
+    line-height: 1.65;
   }
 
   .home-hero-grid .portrait-media {
@@ -1505,11 +1568,11 @@ img {
 
 @media (max-width: 560px) {
   .site-shell {
-    width: min(1260px, calc(100% - 1rem));
+    width: min(1260px, calc(100% - 0.625rem));
   }
 
   .top-nav {
-    padding: 0.32rem;
+    padding: 0.26rem;
   }
 
   .page-main > * {
@@ -1596,6 +1659,10 @@ img {
 
   .photo-media {
     min-height: 0;
+  }
+
+  .photo-media .spotlight-shell {
+    padding-inline: 0.45rem;
   }
 
   .home-hero-grid .portrait-media {

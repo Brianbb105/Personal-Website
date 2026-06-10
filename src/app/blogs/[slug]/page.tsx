@@ -17,6 +17,8 @@ function getDisplayTitle(title: string, slug: string): string {
   return title || slug;
 }
 
+const postsWithoutDetailCover = new Set(["journals-from-my-first-year-at-ucsb", "my-first-icpc-experience"]);
+
 export async function generateStaticParams() {
   const posts = await getAllBlogPosts();
   return posts.map((post) => ({ slug: post.slug }));
@@ -50,7 +52,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   const blogMeta = formatBlogMeta(post.category, post.date);
   const displayTitle = getDisplayTitle(post.title, post.slug);
-  const showDetailCover = Boolean(post.coverImage) && post.slug !== "journals-from-my-first-year-at-ucsb";
+  const showDetailCover = Boolean(post.coverImage) && !postsWithoutDetailCover.has(post.slug);
 
   return (
     <AppShell activePath="/blogs">

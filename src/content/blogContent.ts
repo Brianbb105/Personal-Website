@@ -32,7 +32,8 @@ function getFallbackSlug(fileName: string): string {
 }
 
 function parseDateValue(date: string): number {
-  const timestamp = Date.parse(date);
+  const normalizedDate = date.replace(/\b(\d{1,2})(st|nd|rd|th)\b/gi, "$1");
+  const timestamp = Date.parse(normalizedDate);
   return Number.isNaN(timestamp) ? 0 : timestamp;
 }
 
@@ -94,7 +95,15 @@ const loadBlogPosts = cache(async (): Promise<BlogPostWithContent[]> => {
 export async function getAllBlogPosts(): Promise<BlogPostMetadata[]> {
   const posts = await loadBlogPosts();
 
-  return posts.map(({ content: _content, ...metadata }) => metadata);
+  return posts.map(({ title, date, sortDate, slug, category, coverImage, summary }) => ({
+    title,
+    date,
+    sortDate,
+    slug,
+    category,
+    coverImage,
+    summary,
+  }));
 }
 
 export async function getBlogPostBySlug(slug: string): Promise<BlogPost | null> {

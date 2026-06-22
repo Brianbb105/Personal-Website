@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import AppShell from "@/components/AppShell";
+import BlogAnalytics from "@/components/BlogAnalytics";
 import { getAllBlogPosts, getBlogPostBySlug } from "@/content/blogContent";
 
 type BlogPostPageProps = {
@@ -56,6 +57,10 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   return (
     <AppShell activePath="/blogs">
+      {process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ? (
+        <BlogAnalytics category={post.category} slug={post.slug} title={displayTitle} />
+      ) : null}
+
       <section className="blogs-post reveal delay-2">
         <article className="detail-card blog-article-card">
           {showDetailCover ? (
@@ -77,7 +82,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               <h1 className="blog-post-title">{displayTitle}</h1>
             </header>
 
-            <div className="blog-article-content">
+            <div className="blog-article-content" data-blog-content>
               <MDXRemote source={post.content} />
             </div>
           </div>
